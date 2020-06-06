@@ -1,0 +1,13 @@
+.create-transaction {
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+
+    &--type-income {
+        background: lightGreen;
+    }
+
+    &--type-expanse {
+        background: coral;
+    }
+}

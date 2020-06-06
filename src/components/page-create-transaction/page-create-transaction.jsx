@@ -1,23 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 
 import Wrapper from '../layout-wrapper';
-
+import CreateTransaction from '../create-transaction';
 import { cn } from '../../utils';
+import { TRANSACTION } from '../../constants';
 
 @cn('page-create-transaction')
-class CreateTransaction extends React.Component {
+class CreateTransactionPage extends React.Component {
+    static propTypes = {
+        type: propTypes.oneOf(TRANSACTION.TYPES)
+    };
+
+    state = {
+        activeTransactionType: TRANSACTION.TYPES.EXPANSE
+    };
+
+    getTransactionTypeChangeHandler = (type) => (event) => {
+        event.preventDefault();
+        this.setState({ activeTransactionType: TRANSACTION.TYPES[type] })
+    };
+
+    handleTransactionCreate = (transactionData) => {
+        console.log('transactionData', transactionData);
+    };
+
     render(cn) {
+        const { INCOME, EXPANSE } = TRANSACTION.TYPES;
+        const { activeTransactionType } = this.state;
         return (
             <Wrapper>
                 <div className={ cn }>
+                    <button onClick={ this.getTransactionTypeChangeHandler(EXPANSE) }>
+                        внести расход
+                    </button>
+                    <button onClick={ this.getTransactionTypeChangeHandler(INCOME) }>
+                        внести доход
+                    </button>
                     <div>
-                        <label htmlFor='transactionAmount'>сумма</label>
-                        <input type='text' id='transactionAmount' />
-                    </div>
-                    <div>
-                        <label htmlFor='transactionTimestamt'>дата</label>
-                        <input type='text' id='transactionTimestamt' />
+                        <CreateTransaction
+                            type={ activeTransactionType }
+                            onTransactionCreate={ this.handleTransactionCreate }
+                        />
                     </div>
                 </div>
             </Wrapper>
@@ -29,5 +54,5 @@ class CreateTransaction extends React.Component {
 let mapStateToProps = state => ({ app: state.app });
 let mapDispatchToProps = {};
 
-export { CreateTransaction };
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTransaction);
+export { CreateTransactionPage };
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTransactionPage);
