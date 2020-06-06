@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import PageHome from '../page-home';
+import PageCreateTransaction from '../page-create-transaction';
+
 import PageError from '../page-error';
 
 import { cn } from '../../utils';
@@ -15,6 +17,7 @@ import './app.css';
 export default class App extends React.Component {
     getRenderFunction = {
         [ROUTES.HOME]() { return <PageHome /> },
+        [ROUTES.CREATE_TRANSACTION]() { return <PageCreateTransaction /> },
         [ROUTES.NOT_FOUND]() { return <PageError /> }
     };
 
@@ -26,6 +29,11 @@ export default class App extends React.Component {
                         exact={ true }
                         path='/'
                         render={ this.getRenderFunction[ROUTES.HOME] }
+                    />
+                    <Route
+                        exact={ true }
+                        path={ ROUTES.CREATE_TRANSACTION }
+                        render={ this.getRenderFunction[ROUTES.CREATE_TRANSACTION] }
                     />
                     <Route
                         exact={ true }

@@ -25,7 +25,7 @@ const renderHTMTemplate = (data) => {
 const getDynamicStatePart = async (request) => {
     const { url } = request;
 
-    const state = { solution: {} };
+    const state = { };
     const route = { path: null, params: null };
 
     Object.keys(ROUTES).forEach((key) => {

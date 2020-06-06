@@ -1,0 +1,1 @@
+export { default as TRANSACTION_MODEL } from './transaction';
